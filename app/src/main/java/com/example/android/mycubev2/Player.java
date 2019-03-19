@@ -10,6 +10,13 @@ public class Player extends GameObject {
     public static final int WIDTH = 100;
     private static final int VELOCITY = 5;
 
+    //player input
+    private Vector2D firstPress;
+    private Vector2D secondPress;
+    private Vector2D currentSwipe;
+    private float minSwipeLength = 200;
+    private float firstSwipeLength = 500;
+
     private int health;
 
     public Player(int left, int top, int right, int bottom, Paint paint) {
@@ -38,19 +45,67 @@ public class Player extends GameObject {
     }
 
     //handle touch input
-    @SuppressWarnings("SameReturnValue")
     public boolean handleTouchEvent(MotionEvent event) {
-        //maybe change input
-        if (event.getX() > this.rectangle.centerX()) {
-            this.xVelocity = VELOCITY;
-        } else {
-            this.xVelocity = -VELOCITY;
-        }
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                //save began touch 2d point
+                firstPress = new Vector2D(event.getX(), event.getY());
+                break;
+            case MotionEvent.ACTION_UP:
+                //save ended touch 2d point
+                secondPress = new Vector2D(event.getX(), event.getY());
+                //create vector from the two points
+                currentSwipe = new Vector2D(secondPress.getX() - firstPress.getX(), secondPress.getY() - firstPress.getY());
+                //normalize the 2d vector
 
-        if (event.getY() > this.rectangle.centerY()) {
-            this.yVelocity = VELOCITY;
-        } else {
-            this.yVelocity = -VELOCITY;
+                if (currentSwipe.length() < minSwipeLength) {
+                    return false;
+                }
+
+                if (currentSwipe.length() < firstSwipeLength) {
+                    currentSwipe.norm();
+
+                    //swipe upwards
+                    if (currentSwipe.getY() > 0 && currentSwipe.getX() > -0.5f && currentSwipe.getX() < 0.5f) {
+                        yVelocity = VELOCITY;
+                    }
+                    //swipe down
+                    if (currentSwipe.getY() < 0 && currentSwipe.getX() > -0.5f && currentSwipe.getX() < 0.5f) {
+                        yVelocity = -VELOCITY;
+                    }
+                    //swipe left
+                    if (currentSwipe.getX() < 0 && currentSwipe.getY() > -0.5f && currentSwipe.getY() < 0.5f) {
+                        xVelocity = -VELOCITY;
+                    }
+                    //swipe right
+                    if (currentSwipe.getX() > 0 && currentSwipe.getY() > -0.5f && currentSwipe.getY() < 0.5f) {
+                        xVelocity = VELOCITY;
+                    }
+                } else {
+                    currentSwipe.norm();
+
+                    //swipe upwards
+                    if (currentSwipe.getY() > 0 && currentSwipe.getX() > -0.5f && currentSwipe.getX() < 0.5f) {
+                        yVelocity = VELOCITY;
+                        xVelocity = 0;
+                    }
+                    //swipe down
+                    if (currentSwipe.getY() < 0 && currentSwipe.getX() > -0.5f && currentSwipe.getX() < 0.5f) {
+                        yVelocity = -VELOCITY;
+                        xVelocity = 0;
+                    }
+                    //swipe left
+                    if (currentSwipe.getX() < 0 && currentSwipe.getY() > -0.5f && currentSwipe.getY() < 0.5f) {
+                        xVelocity = -VELOCITY;
+                        yVelocity = 0;
+                    }
+                    //swipe right
+                    if (currentSwipe.getX() > 0 && currentSwipe.getY() > -0.5f && currentSwipe.getY() < 0.5f) {
+                        xVelocity = VELOCITY;
+                        yVelocity = 0;
+                    }
+                }
+
         }
         return true;
     }

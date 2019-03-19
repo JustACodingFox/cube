@@ -57,6 +57,7 @@ public class GameActivity extends Activity {
                     case RESULT_OK:
                         mGameView = new GameView(this, this);
                         mGameView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+                        mGameView.setZOrderOnTop(true);
                         setContentView(mGameView);
                         break;
                     case RESULT_CANCELED:
