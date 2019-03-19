@@ -1,6 +1,6 @@
 package com.example.android.mycubev2;
 
-public class Utility {
+class Utility {
 
     public static boolean isPrime(int toCheck) {
         boolean isPrime = true;

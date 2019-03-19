@@ -2,7 +2,7 @@ package com.example.android.mycubev2;
 
 import android.graphics.Paint;
 
-public class GamePaints {
+class GamePaints {
 
     //game
     public static final Paint PLAYER_PAINT = new Paint();

@@ -9,6 +9,7 @@ public class BasicEnemy extends GameObject {
     public static final int WIDTH = 50;
     public static final int VELOCITY = 5;
 
+    @SuppressWarnings("unused")
     public BasicEnemy(int left, int top, int right, int bottom, Paint paint, int xVel, int yVel) {
         this.rectangle = new Rect(left, top, right, bottom);
         this.paint = paint;

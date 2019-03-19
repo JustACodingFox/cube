@@ -11,15 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameOverActivity extends AppCompatActivity {
 
-    private int score;
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
-        score = getIntent().getIntExtra(GameActivity.SCORE, 0);
+        int score = getIntent().getIntExtra(GameActivity.SCORE, 0);
 
         Button returnButton = findViewById(R.id.return_button);
         Button playAgainButton = findViewById(R.id.play_again_button);
@@ -31,13 +29,13 @@ public class GameOverActivity extends AppCompatActivity {
         playAgainButton.setOnClickListener(this::playAgain);
     }
 
-    public void playAgain(View view) {
+    private void playAgain(View view) {
         Intent returnIntent = new Intent();
         setResult(RESULT_OK, returnIntent);
         finish();
     }
 
-    public void returnStart(View view) {
+    private void returnStart(View view) {
         Intent returnIntent = new Intent();
         setResult(RESULT_CANCELED, returnIntent);
         finish();

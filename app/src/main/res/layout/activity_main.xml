@@ -31,7 +31,8 @@
             android:text="@string/score"
             android:textColor="@android:color/white"
             android:textSize="40sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="NestedWeights" />
 
         <TextView
             android:id="@+id/scoreNumber"

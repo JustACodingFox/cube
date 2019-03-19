@@ -3,11 +3,12 @@ package com.example.android.mycubev2;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-public class UIElements {
+class UIElements {
 
-    private Rect healthbarBackground;
-    private Rect healthbar;
-    private String scoreString = "Score ";
+    private final static String scoreString = "Score ";
+
+    private final Rect healthbarBackground;
+    private final Rect healthbar;
     private int score;
 
     public UIElements() {

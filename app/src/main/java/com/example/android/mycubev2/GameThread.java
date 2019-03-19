@@ -6,15 +6,14 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
-public class GameThread extends Thread {
+class GameThread extends Thread {
 
-    public static Canvas canvas;
-    private SurfaceHolder surfaceHolder;
-    private GameView gameView;
+    @SuppressWarnings("FieldCanBeLocal")
+    private static Canvas canvas;
+    private final SurfaceHolder surfaceHolder;
+    private final GameView gameView;
     private boolean running;
-    private int targetFPS = 60;
-    private double averageFPS;
-    private Game game;
+    private final Game game;
 
     public GameThread(SurfaceHolder surfaceHolder, GameView gameView) {
 
@@ -36,6 +35,7 @@ public class GameThread extends Thread {
         long waitTime;
         long totalTime = 0;
         int frameCount = 0;
+        int targetFPS = 60;
         long targetTime = 1000 / targetFPS;
 
         while (running) {
@@ -67,12 +67,13 @@ public class GameThread extends Thread {
             try {
                 sleep(waitTime);
             } catch (Exception e) {
+                Log.e("GameThread", "Error trying to sleep", e);
             }
 
             totalTime += System.nanoTime() - startTime;
             frameCount++;
             if (frameCount == targetFPS) {
-                averageFPS = 1000 / ((totalTime / frameCount) / 1000000);
+                @SuppressWarnings("IntegerDivisionInFloatingPointContext") double averageFPS = 1000 / ((totalTime / frameCount) / 1000000);
                 frameCount = 0;
                 totalTime = 0;
                 Log.i("FPS", Double.toString(averageFPS));

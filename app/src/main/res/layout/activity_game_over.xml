@@ -27,6 +27,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="?android:attr/buttonBarStyle"
             android:orientation="horizontal">
 
             <Button
@@ -37,6 +38,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:text="@string/play_again"
+                style="?android:attr/buttonBarButtonStyle"
                 android:textColor="@android:color/black" />
 
             <Button
@@ -47,6 +49,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:text="@string/return_button"
+                style="?android:attr/buttonBarButtonStyle"
                 android:textColor="@android:color/black" />
 
         </LinearLayout>

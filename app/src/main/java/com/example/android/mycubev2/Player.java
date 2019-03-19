@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 public class Player extends GameObject {
 
     public static final int WIDTH = 100;
-    public static final int VELOCITY = 5;
+    private static final int VELOCITY = 5;
 
     private int health;
 
@@ -38,6 +38,7 @@ public class Player extends GameObject {
     }
 
     //handle touch input
+    @SuppressWarnings("SameReturnValue")
     public boolean handleTouchEvent(MotionEvent event) {
         //maybe change input
         if (event.getX() > this.rectangle.centerX()) {

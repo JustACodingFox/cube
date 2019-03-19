@@ -4,13 +4,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-public abstract class GameObject {
+abstract class GameObject {
 
-    protected Rect rectangle;
-    protected Paint paint;
+    Rect rectangle;
+    Paint paint;
 
-    protected int xVelocity;
-    protected int yVelocity;
+    int xVelocity;
+    int yVelocity;
 
     public abstract void update();
 

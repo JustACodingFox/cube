@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class GameActivity extends Activity {
 
-    public static final int REQUESTCODE = 2;
+    private static final int REQUESTCODE = 2;
     public static final String SCORE = "Score";
 
     private GameView mGameView;
@@ -24,6 +24,7 @@ public class GameActivity extends Activity {
         mGameView = new GameView(this, this);
 
         mGameView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        mGameView.setZOrderOnTop(true);
         setContentView(mGameView);
     }
 

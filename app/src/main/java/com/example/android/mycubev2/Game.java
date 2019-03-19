@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Game {
+class Game {
 
     private static int GAME_HEIGHT;
     private static int GAME_WIDTH;
 
-    public List<GameObject> mGameObjects;
-    private Player player;
-    private GameThread thread;
-    private UIElements uiElements;
-    private Random random;
+    private final List<GameObject> mGameObjects;
+    private final Player player;
+    private final GameThread thread;
+    private final UIElements uiElements;
+    private final Random random;
     private int score;
     private int lastEnemySpawn;
 
