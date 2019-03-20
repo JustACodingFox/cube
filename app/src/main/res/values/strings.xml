@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyCubeV2</string>
+    <string name="game_over">Game Over</string>
+    <string name="play_button">Play</string>
+    <string name="play_again">Play Again</string>
+    <string name="return_button">Return</string>
+    <string name="score">Score</string>
+    <string name="zero">0</string>
+    <string name="app_title">C.U.B.E.</string>
+</resources>
