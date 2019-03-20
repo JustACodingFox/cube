@@ -46,67 +46,10 @@ public class Player extends GameObject {
 
     //handle touch input
     public boolean handleTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                //save began touch 2d point
-                firstPress = new Vector2D(event.getX(), event.getY());
-                break;
-            case MotionEvent.ACTION_UP:
-                //save ended touch 2d point
-                secondPress = new Vector2D(event.getX(), event.getY());
-                //create vector from the two points
-                currentSwipe = new Vector2D(secondPress.getX() - firstPress.getX(), secondPress.getY() - firstPress.getY());
-                //normalize the 2d vector
-
-                if (currentSwipe.length() < minSwipeLength) {
-                    return false;
-                }
-
-                if (currentSwipe.length() < firstSwipeLength) {
-                    currentSwipe.norm();
-
-                    //swipe upwards
-                    if (currentSwipe.getY() > 0 && currentSwipe.getX() > -0.5f && currentSwipe.getX() < 0.5f) {
-                        yVelocity = VELOCITY;
-                    }
-                    //swipe down
-                    if (currentSwipe.getY() < 0 && currentSwipe.getX() > -0.5f && currentSwipe.getX() < 0.5f) {
-                        yVelocity = -VELOCITY;
-                    }
-                    //swipe left
-                    if (currentSwipe.getX() < 0 && currentSwipe.getY() > -0.5f && currentSwipe.getY() < 0.5f) {
-                        xVelocity = -VELOCITY;
-                    }
-                    //swipe right
-                    if (currentSwipe.getX() > 0 && currentSwipe.getY() > -0.5f && currentSwipe.getY() < 0.5f) {
-                        xVelocity = VELOCITY;
-                    }
-                } else {
-                    currentSwipe.norm();
-
-                    //swipe upwards
-                    if (currentSwipe.getY() > 0 && currentSwipe.getX() > -0.5f && currentSwipe.getX() < 0.5f) {
-                        yVelocity = VELOCITY;
-                        xVelocity = 0;
-                    }
-                    //swipe down
-                    if (currentSwipe.getY() < 0 && currentSwipe.getX() > -0.5f && currentSwipe.getX() < 0.5f) {
-                        yVelocity = -VELOCITY;
-                        xVelocity = 0;
-                    }
-                    //swipe left
-                    if (currentSwipe.getX() < 0 && currentSwipe.getY() > -0.5f && currentSwipe.getY() < 0.5f) {
-                        xVelocity = -VELOCITY;
-                        yVelocity = 0;
-                    }
-                    //swipe right
-                    if (currentSwipe.getX() > 0 && currentSwipe.getY() > -0.5f && currentSwipe.getY() < 0.5f) {
-                        xVelocity = VELOCITY;
-                        yVelocity = 0;
-                    }
-                }
-
-        }
+        Vector2D diff = new Vector2D(event.getX() - this.rectangle.centerX(), event.getY() - this.rectangle.centerY());
+        diff.norm();
+        xVelocity = (int) (diff.getX() * 10);
+        yVelocity = (int) (diff.getY() * 10);
         return true;
     }
 
